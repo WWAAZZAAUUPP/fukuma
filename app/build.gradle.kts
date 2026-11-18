@@ -8,6 +8,15 @@ android {
     namespace = "com.example.telemetry"
     compileSdk = 34
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("telemetry-release-key.jks")
+            storePassword = "telemetry123"
+            keyAlias = "telemetry_alias"
+            keyPassword = "telemetry123"
+        }
+    }
+
     defaultConfig {
         applicationId = "com.example.telemetry"
         minSdk = 26
@@ -15,18 +24,16 @@ android {
         versionCode = 1
         versionName = "1.0"
         
-        buildConfigField("String", "SUPABASE_URL", "\"https://YOUR_PROJECT.supabase.co\"")
-        buildConfigField("String", "SUPABASE_KEY", "\"YOUR_ANON_KEY\"")
+        buildConfigField("String", "SUPABASE_URL", "\"https://eitriabinqdjrjwwfuvg.supabase.co\"")
+        buildConfigField("String", "SUPABASE_KEY", "\"sb_publishable_8Ve4My5LWIfZ_1Jf6u2Qhg_mlh_MgP9\"")
     }
 
     buildTypes {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
-        debug {
-            isMinifyEnabled = false
         }
     }
     compileOptions {
